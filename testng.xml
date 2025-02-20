@@ -3,7 +3,7 @@
 <suite name="Suite-Regression">
   <test thread-count="5" name="Tutorial">
     <classes>
-      <class name="haatbhaar.ui_simple.WriteContentOnHtmlReport"/>
+      <class name="haatbhaar.ui_simple.AshotIntegration"/>
     </classes>
   </test> <!-- Tutorial -->
 </suite> <!-- Suite-Regression -->

@@ -20,6 +20,7 @@
         <selenium.version>4.28.1</selenium.version>
         <testng.version>7.11.0</testng.version>        
         <extentreports.version>5.1.2</extentreports.version>
+        <ashot.version>1.5.4</ashot.version>
 
     </properties>
 
@@ -73,7 +74,15 @@
 			<artifactId>extentreports</artifactId>
 			<version>${extentreports.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
+		<dependency>
+		    <groupId>ru.yandex.qatools.ashot</groupId>
+		    <artifactId>ashot</artifactId>
+		    <version>${ashot.version}</version>
+		</dependency>
+
     </dependencies>
+    
 
 
     <build>
