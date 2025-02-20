@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
 
 public class AshotIntegration extends BaseClass{
 	public static final Logger log = LogManager.getLogger(AshotIntegration.class);
@@ -24,7 +25,8 @@ public class AshotIntegration extends BaseClass{
 			test.info("Welcome to my report with attached Screenshot");
 			
 			AShot ashot = new AShot(); 
-			ru.yandex.qatools.ashot.Screenshot ss = ashot.takeScreenshot(driver);
+			Screenshot ss = ashot.takeScreenshot(driver);
+			System.out.println(fullImagePath);
 			ImageIO.write(ss.getImage(), "PNG", new File(fullImagePath));
 			test.info("Image getting attached");
 			Assert.assertTrue(false);//Expected condition True but intentionally failed it to attach an screenshot
@@ -34,7 +36,6 @@ public class AshotIntegration extends BaseClass{
 			test.addScreenCaptureFromPath(fullImagePath);
 			
 		}
-		QuitBrowser();
 	}
 	
 	@Test(	description="Show pass and pass result",
@@ -45,7 +46,6 @@ public class AshotIntegration extends BaseClass{
 		test.info("Image is generated at : " + fullImagePath);
 		System.out.println(fullImagePath);
 		test.pass("Image is attached successfully!!!");
-		QuitBrowser();
 	}
 	
 }

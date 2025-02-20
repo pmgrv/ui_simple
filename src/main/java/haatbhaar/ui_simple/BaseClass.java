@@ -1,0 +1,74 @@
+package haatbhaar.ui_simple;
+
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+public class BaseClass {
+	protected static ExtentReports extent;
+	private  static String userDir = System.getProperty("user.dir");
+//	public static String fullImagePath = userDir + "/target/CaptureImage.png";
+	protected static String fullImagePath = System.getProperty("user.dir") + "/target/currentPageScreenshot.png";
+	private static String fullReportPath = userDir + "/target/" +"ExtentReport.html";
+	protected static WebDriver driver;
+	private String urlPath = "https://google.com";
+	protected static Logger log;
+	protected ExtentTest test;
+	
+	@BeforeSuite
+	public void InitExtentReport() {
+		//Initialize ExtentReports
+		extent = new ExtentReports();
+		
+		//Initialize ExtentReports Spark: Image/File/Video
+		ExtentSparkReporter report = new ExtentSparkReporter(fullReportPath);
+		
+		//AttachReport
+		extent.attachReporter(report);
+		
+		//Add system information
+		extent.setSystemInfo("Environment", "QA");
+		extent.setSystemInfo("Browser", "Chrome");
+	}
+	
+	@BeforeTest
+	public void InitDriver() {
+		log = org.apache.logging.log4j.LogManager.getLogger();
+		test = extent.createTest("Wake up call!!!");
+		log.info("Driver initilization...");
+		test.info("Driver initilization...");
+		
+		driver = new ChromeDriver();
+		log.info("Chrome is ready. Window maximization...");
+		test.info("Chrome is ready. Window maximization...");
+		
+		driver.manage().window().maximize();
+		log.info("Entering URL");
+		test.info("Entering URL");
+		
+		driver.get(urlPath);
+		log.info("Congratulation!!! Page loaded successfully.");
+		test.info("Congratulation!!! Page loaded successfully.");
+	}
+	
+	@AfterTest
+	protected void QuitBrowser() {
+		if( driver != null)	driver.quit();
+	}
+	
+	@AfterSuite
+	public void FlushExtentReport() {
+		if(extent != null)	extent.flush();
+	}
+	
+	
+	
+}
