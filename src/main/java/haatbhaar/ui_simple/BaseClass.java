@@ -3,6 +3,7 @@ package haatbhaar.ui_simple;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
@@ -41,12 +42,18 @@ public class BaseClass {
 	
 	@BeforeTest
 	public void InitDriver() {
-		log = org.apache.logging.log4j.LogManager.getLogger();
+		log = org.apache.logging.log4j.LogManager.getLogger();		
 		test = extent.createTest("Wake up call!!!");
-		log.info("Driver initilization...");
-		test.info("Driver initilization...");
 		
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");
+		options.addArguments("--window-size=1920,1080");
+
+		log.info("Driver initilization started...");
+		driver = new ChromeDriver(options);
+		test.info("Driver initilized...");
+		
+//		driver = new ChromeDriver();
 		log.info("Chrome is ready. Window maximization...");
 		test.info("Chrome is ready. Window maximization...");
 		
