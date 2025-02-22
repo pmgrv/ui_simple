@@ -4,8 +4,12 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
@@ -40,7 +44,7 @@ public class BaseClass {
 		extent.setSystemInfo("Browser", "Chrome");
 	}
 	
-	@BeforeTest
+	@BeforeClass
 	public void InitDriver() {
 		log = org.apache.logging.log4j.LogManager.getLogger();		
 		test = extent.createTest("Wake up call!!!");
@@ -50,10 +54,10 @@ public class BaseClass {
 		options.addArguments("--window-size=1920,1080");
 
 		log.info("Driver initilization started...");
-		driver = new ChromeDriver(options);
+//		driver = new ChromeDriver(options);
 		test.info("Driver initilized...");
 		
-//		driver = new ChromeDriver();
+		driver = new ChromeDriver();
 		log.info("Chrome is ready. Window maximization...");
 		test.info("Chrome is ready. Window maximization...");
 		
@@ -66,9 +70,16 @@ public class BaseClass {
 		test.info("Congratulation!!! Page loaded successfully.");
 	}
 	
-	@AfterTest
+	@AfterClass
 	protected void QuitBrowser() {
-		if( driver != null)	driver.quit();
+		log.info("Driver getting closed successfully!!!");
+		test.info("Driver getting closed successfully!!!");
+		if( driver != null)	{
+			driver.quit();
+			log.info("Hurray!! Dirve quit successfully!! \n Congratulations, Test Executed Successfully!");
+			test.info("Hurray!! Dirve quit successfully!! \n Congratulations, Test Executed Successfully!");
+		}
+		
 	}
 	
 	@AfterSuite
