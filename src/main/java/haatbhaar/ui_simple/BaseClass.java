@@ -24,9 +24,10 @@ public class BaseClass {
 	protected static String fullImagePath = System.getProperty("user.dir") + "/target/currentPageScreenshot.png";
 	private static String fullReportPath = userDir + "/target/" +"ExtentReport.html";
 	protected static WebDriver driver;
-	private String urlPath = "https://google.com";
+	private String urlPath = "http://haatbhaar.great-site.net/";
 	protected static Logger log;
 	protected ExtentTest test;
+	protected String toOperate = "Pravinkumar Raut";
 	
 	@BeforeSuite
 	public void InitExtentReport() {
@@ -53,9 +54,9 @@ public class BaseClass {
 		options.addArguments("--headless");
 		options.addArguments("--window-size=1920,1080");
 
-		log.info("Driver initilization started...");
+		log.info("Driver initialization started...");
 //		driver = new ChromeDriver(options);
-		test.info("Driver initilized...");
+		test.info("Driver initialized...");
 		
 		driver = new ChromeDriver();
 		log.info("Chrome is ready. Window maximization...");
@@ -76,8 +77,8 @@ public class BaseClass {
 		test.info("Driver getting closed successfully!!!");
 		if( driver != null)	{
 			driver.quit();
-			log.info("Hurray!! Dirve quit successfully!! \n Congratulations, Test Executed Successfully!");
-			test.info("Hurray!! Dirve quit successfully!! \n Congratulations, Test Executed Successfully!");
+			log.info("Hurray!! Driver Quit browser successfully!! \n Congratulations, Test Executed Successfully!");
+			test.info("Hurray!! Driver Quit browser successfully!! \n Congratulations, Test Executed Successfully!");
 		}
 		
 	}
